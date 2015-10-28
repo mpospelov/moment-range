@@ -140,7 +140,7 @@ DateRange.prototype.intersect = function(other, exclusive) {
             {---other---} |             {---other---}
    */
   if ((start <= other.start) &&
-    (other.start < end || (other.start.isSame(end) && !exclusive)) &&
+    (other.start < end || (!exclusive && other.start.isSame(end))) &&
     (end < other.end)) {
     return new DateRange(other.start, end);
   }
@@ -149,7 +149,7 @@ DateRange.prototype.intersect = function(other, exclusive) {
       {---other---}      | {---other---}
    */
   else if ((other.start < start) &&
-    (start < other.end || (start.isSame(other.end) && !exclusive)) &&
+    (start < other.end || (!exclusive && start.isSame(other.end))) &&
     (other.end <= end)) {
     return new DateRange(start, other.end);
   }
